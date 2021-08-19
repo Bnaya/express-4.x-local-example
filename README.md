@@ -1,3 +1,5 @@
+https://medium.com/front-end-weekly/learn-using-jwt-with-passport-authentication-9761539c4314
+
 This example illustrates how to use [Express](https://expressjs.com) 4.x and
 [Passport](https://www.passportjs.org) to sign users in with a username and
 password.  Use this example as a starting point for your own web applications.

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+  <title>Log in example | Passport.js</title>
+  <meta name="description" content="Express 4.x app using Passport for authentication with username and password.">
+
+  <!-- Pico.css -->
+  <link rel="stylesheet" href="/stylesheets/pico.css">
+  <style>
+    article div:nth-of-type(2) {
+      display: none;
+      background-color: #374956;
+      background-image: url("https://source.unsplash.com/QgR5pKDoCd0/1000x1200");
+      background-position: center;
+      background-size: cover;
+    }
+
+    @media (min-width: 992px) {
+      .grid>div:nth-of-type(2) {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <article class="grid">
+      <div>
+        <% if (hasMessages) { %>
+          <ul>
+            <% messages.forEach(function(message){ %>
+              <li>
+                <%= message %>
+              </li>
+              <% }); %>
+          </ul>
+          <% } %>
+
+            <hgroup>
+              <h1>Sign in for token</h1>
+            </hgroup>
+            <form method="post">
+              <input type="text" name="username" placeholder="Username">
+              <input type="password" name="password" placeholder="Password">
+              <button type="submit" class="contrast">Sign in</button>
+            </form>
+            <script>
+              document.querySelector('form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget)
+
+                const r = await fetch("http://localhost:3000/login/password-for-token", {
+                  "headers": {
+                    "content-type": "application/x-www-form-urlencoded",
+                  },
+                  "body": `username=${encodeURIComponent(formData.get("username"))}&password=${encodeURIComponent(formData.get("password"))}`,
+                  "method": "POST"
+                });
+                const resp = await r.json()
+                localStorage.setItem('token', resp.token);
+              })
+            </script>
+      </div>
+      <div></div>
+      <div>
+        or <a href="/users/new">Create an account</a>
+      </div>
+    </article>
+  </main>
+
+</body>
+
+</html>
